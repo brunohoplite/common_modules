@@ -11,9 +11,9 @@
 
 void userLedInit(void)
 {
-	for(unsigned i = 0; i < ledModulesCount; i++)
+	for(unsigned i = 0; i < userLedModulesCount; i++)
 	{
-		UserLedContext* ctx = &ledModules[i];
+		UserLedContext* ctx = &userLedModules[i];
 
 		if(ctx->init.kind == LED_HEARTBEAT)
 			ctx->heartBeatTicks = GetTick();
@@ -24,14 +24,14 @@ void userLedInit(void)
 
 void userLedHeartBeat(void)
 {
-	for(unsigned i = 0; i < ledModulesCount; i++)
+	for(unsigned i = 0; i < userLedModulesCount; i++)
 	{
-		UserLedContext* ctx = &ledModules[i];
+		UserLedContext* ctx = &userLedModules[i];
 
 		if(ctx->init.kind == LED_HEARTBEAT)
 		{
-			GpioTogglePin(ctx.ledPort, ctx.ledPin);
-			ctx->heartBeatTicks = HAL_GetTick();
+			GpioTogglePin(ctx->init.ledPort, ctx->init.ledPin);
+			ctx->heartBeatTicks = GetTick();
 		}
 	}
 }
@@ -41,7 +41,7 @@ void userLedSetHeartBeatPeriod(UserLedContext* ctx, unsigned period)
 	ctx->heartBeatPeriod = period;
 }
 
-unsigned userLedGetHeartBeatPeriod(UserLedContext* ctx)
+const unsigned userLedGetHeartBeatPeriod(UserLedContext* ctx)
 {
-	return const ctx->heartBeatPeriod;
+	return ctx->heartBeatPeriod;
 }

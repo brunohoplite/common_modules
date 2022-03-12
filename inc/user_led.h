@@ -14,9 +14,9 @@
 #define DEFAULT_USER_LED_PERIOD    1000
 
 // Macros
-#define USER_LEDS_START UserLedContext ledModules[] = {
-#define USER_LED( ... ) { __VA_ARGS__ }
-#define USER_LEDS_END }; const unsigned ledModulesCount = ARRAY_SIZE(ledModules);
+#define USER_LEDS_START UserLedContext userLedModules[] = {
+#define USER_LED( ... ) { { __VA_ARGS__ } }
+#define USER_LEDS_END }; const unsigned userLedModulesCount = ARRAY_SIZE(userLedModules);
 
 // Types
 typedef enum {
@@ -42,7 +42,7 @@ typedef struct{
 void userLedInit(void);
 void userLedHeartBeat(void);
 void userLedSetHeartBeatPeriod(UserLedContext* ctx, unsigned period);
-unsigned userLedGetHeartBeatPeriod(UserLedContext* ctx);
+const unsigned userLedGetHeartBeatPeriod(UserLedContext* ctx);
 
-extern UserLedContext ledModules[];
-extern const unsigned ledModulesCount;
+extern UserLedContext userLedModules[];
+extern const unsigned userLedModulesCount;
