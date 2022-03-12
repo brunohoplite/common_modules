@@ -1,2 +1,2 @@
-# common_modules
+# Common modules
 Catalogue of commonly used modules
