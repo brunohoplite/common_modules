@@ -12,6 +12,7 @@
 
 // Constants
 #define DEFAULT_USER_LED_PERIOD    1000
+#define ALTERNATE_LED_PERIOD    250
 
 // Macros
 #define USER_LEDS_START UserLedContext userLedModules[] = {

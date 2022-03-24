@@ -22,6 +22,7 @@
 #endif
 
 typedef GPIO_TypeDef GpioPort;
+typedef HAL_StatusTypeDef HalStatus;
 
 #define GPIO_HIGH    GPIO_PIN_SET
 #define GPIO_LOW    GPIO_PIN_RESET

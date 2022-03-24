@@ -16,7 +16,10 @@ void userLedInit(void)
 		UserLedContext* ctx = &userLedModules[i];
 
 		if(ctx->init.kind == LED_HEARTBEAT)
+		{
 			ctx->heartBeatTicks = GetTick();
+			ctx->heartBeatPeriod = 1000;
+		}
 		else
 			GpioWritePin(ctx->init.ledPort, ctx->init.ledPin, (ctx->init.isActiveLow ? GPIO_HIGH : GPIO_LOW));
 	}
@@ -28,7 +31,7 @@ void userLedHeartBeat(void)
 	{
 		UserLedContext* ctx = &userLedModules[i];
 
-		if(ctx->init.kind == LED_HEARTBEAT)
+		if(ctx->init.kind == LED_HEARTBEAT && ( (GetTick() - ctx->heartBeatTicks) >= ctx->heartBeatPeriod))
 		{
 			GpioTogglePin(ctx->init.ledPort, ctx->init.ledPin);
 			ctx->heartBeatTicks = GetTick();
